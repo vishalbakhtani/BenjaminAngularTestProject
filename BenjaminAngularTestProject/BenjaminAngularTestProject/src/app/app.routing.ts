@@ -15,6 +15,7 @@ export const appRoutes: Route[] = [
         component: LayoutComponent,
         children: [
             { path: 'home', loadChildren: () => import('app/modules/home/home.module').then(m => m.HomeModule) },
+            { path: 'profile', loadChildren: () => import('app/modules/profile/profile.module').then(m => m.ProfileModule) },
             // Catch all
             { path: '**', redirectTo: 'home' }
         ]

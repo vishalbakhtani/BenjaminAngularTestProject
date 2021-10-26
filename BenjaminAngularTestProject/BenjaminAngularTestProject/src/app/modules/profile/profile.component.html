@@ -1,0 +1,93 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="bg-card">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
+                        <img class="w-full h-full object-cover"
+                             src="assets/images/avatars/brian-hughes.jpg">
+                    </div>
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <div class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-snug truncate">Vishal Bakhtani</div>
+                        <div class="flex items-center">
+                            <div class="ml-1.5 leading-6 truncate text-secondary">
+                                100 posts 192 followers 127 following
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
+        <div class="w-full max-w-screen-xl mx-auto">
+            <!-- Tabs -->
+            <mat-tab-group class="sm:px-2"
+                           [animationDuration]="'0'">
+
+                <!-- Posts -->
+                <mat-tab label="POSTS">
+                    <ng-template matTabContent>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden" *ngFor="let post of posts">
+                                <div class="flex flex-col flex-auto mt-6">
+                                    <img class="flex-auto w-full h-50"
+                                         [src]="'https://picsum.photos/200/300?random=' + post">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </mat-tab>
+
+                <!-- Videos -->
+                <mat-tab label="VIDEOS">
+                    <ng-template matTabContent>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden" *ngFor="let video of videos">
+                                <div class="flex flex-col flex-auto mt-6">
+                                    <img class="flex-auto w-full h-50"
+                                         [src]="'https://picsum.photos/200/300?random=' + video">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </mat-tab>
+
+                <!-- Saved -->
+                <mat-tab label="SAVED">
+                    <ng-template matTabContent>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden" *ngFor="let save of saved">
+                                <div class="flex flex-col flex-auto mt-6">
+                                    <img class="flex-auto w-full h-50"
+                                         [src]="'https://picsum.photos/200/300?random=' + save">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </mat-tab>
+
+                <!-- Tagged -->
+                <mat-tab label="TAGGED">
+                    <ng-template matTabContent>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
+                            <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden" *ngFor="let tag of tagged">
+                                <div class="flex flex-col flex-auto mt-6">
+                                    <img class="flex-auto w-full h-50"
+                                         [src]="'https://picsum.photos/200/300?random=' + tag">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </mat-tab>
+
+            </mat-tab-group>
+        </div>
+    </div>
+
+</div>
