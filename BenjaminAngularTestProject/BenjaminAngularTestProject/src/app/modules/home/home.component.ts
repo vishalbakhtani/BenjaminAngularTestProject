@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { HomeService } from './home.service';
+import { takeUntil } from 'rxjs/operators';
+import { FuseMediaWatcherService } from '../../../@fuse/services/media-watcher';
+import { PostModel } from './models/post.model';
+import { HomeService } from './shared/home.service';
 
 @Component({
     selector: 'app-home',
@@ -9,12 +12,16 @@ import { HomeService } from './home.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
+    isScreenSmall: boolean;
+    posts: Array<PostModel>;
+
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
      * Constructor
      */
     constructor(
+        private _fuseMediaWatcherService: FuseMediaWatcherService,
         private _homeService: HomeService
     ) { }
 
@@ -26,6 +33,16 @@ export class HomeComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        // Subscribe to media changes
+        this._fuseMediaWatcherService.onMediaChange$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe(({ matchingAliases }) => {
+
+                // Check if the screen is small
+                this.isScreenSmall = !matchingAliases.includes('md');
+            });
+
+        this.posts = new Array<PostModel>();
         this.getPosts();
     }
 
@@ -46,8 +63,17 @@ export class HomeComponent implements OnInit, OnDestroy {
      * Get Posts
      */
     getPosts(): void {
-        //this._homeService.getPosts().subscribe(result => {
-        //    console.log(result);
-        //});
+        this._homeService.getPosts().subscribe(response => {
+            if (response && response.results && response.results.length > 0) {
+                for (let result of response.results) {
+                    let post = new PostModel();
+                    post.salutation = result.name.title;
+                    post.firstName = result.name.first;
+                    post.lastName = result.name.last;
+                    post.thumbnail = result.picture.thumbnail;
+                    this.posts.push(post);
+                }
+            }
+        });
     }
 }

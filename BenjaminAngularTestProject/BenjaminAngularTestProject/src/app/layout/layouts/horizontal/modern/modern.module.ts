@@ -10,6 +10,7 @@ import { FuseLoadingBarModule } from '@fuse/components/loading-bar';
 import { FuseNavigationModule } from '@fuse/components/navigation';
 import { SharedModule } from 'app/shared/shared.module';
 import { ModernLayoutComponent } from 'app/layout/layouts/horizontal/modern/modern.component';
+import { UserModule } from '../../../common/user/user.module';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { ModernLayoutComponent } from 'app/layout/layouts/horizontal/modern/mode
         FuseFullscreenModule,
         FuseLoadingBarModule,
         FuseNavigationModule,
+        UserModule,
         SharedModule
     ],
     exports     : [
